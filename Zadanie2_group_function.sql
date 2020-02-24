@@ -15,3 +15,7 @@ From students st
 Select count(avg(st.n_group))
 From students st
 Where st.ngroup like '20__' or st.ngroup like '22__'
+--#5
+Select count(st.n_group), avg(st.score), st.n_group
+From students st
+Group by n_group
