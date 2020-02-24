@@ -33,4 +33,4 @@ Where h.name = 'Футбол' or h.name = 'Хоккей'
 --6
 Select sth.student_id, sth.hobby_id
 From students_hobbies sth
-Where sth.date_start > '2012-02-01' and sth.date_finish < '2019-12-01' and sth.date_finish is null
+Where sth.date_start > '2012-02-01' and sth.date_finish < '2019-12-01' and sth.student_id > 10
