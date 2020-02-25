@@ -19,3 +19,10 @@ Where st.ngroup like '20__' or st.ngroup like '22__'
 Select count(st.n_group), avg(st.score), st.n_group
 From students st
 Group by n_group
+--#6
+                 
+--#7
+Select st.n_group, avg(st.score) as q
+From students st
+Group by st.n_group
+Having avg(st.score) < max(st.score)
