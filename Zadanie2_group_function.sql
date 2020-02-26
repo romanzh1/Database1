@@ -16,7 +16,7 @@ Select avg(st.score)
 From students st
 --#6 ?
                  
---#7
+--#7-
 Select count(st.n_group), avg(st.score), st.n_group
 From students st
 Where avg(st.score) > 3.5
