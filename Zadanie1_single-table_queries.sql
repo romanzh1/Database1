@@ -31,9 +31,9 @@ Select h.name, h.risk
 From hobbies h
 Where h.name = 'Футбол' or h.name = 'Хоккей'
 --#6
-Select sth.student_id, sth.hobby_id
-From students_hobbies sth
-Where sth.date_start > '2012-02-01' and sth.date_finish < '2019-12-01' and sth.student_id > 10
+Select sh.id, sh.student_id
+From students_hobbies sh
+Where sh.date_start between '2016/04/01' and '2020/02/23'and sh.date_finish is null
 --#7
 Select st.name, st. surname, st.score
 From students st
