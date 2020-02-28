@@ -33,4 +33,12 @@ Select st.n_group, count(st.name), max(st.score),avg(st.score), min(st.score)
 From Students st
 Group by st.n_group
 Order by st.n_group
+--#9
 
+--#10
+SELECT n_group, name
+FROM students
+WHERE score =
+    (SELECT max(score)
+     FROM students)
+Group by n_group, name
