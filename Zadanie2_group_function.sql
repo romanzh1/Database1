@@ -49,3 +49,4 @@ Where st.name =
 	Where score =
 		(Select max(q.score)
 		 From students q))
+Group by st.n_group, st.name
