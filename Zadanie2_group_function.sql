@@ -34,11 +34,18 @@ From Students st
 Group by st.n_group
 Order by st.n_group
 --#9
-
---#10
-SELECT n_group, name
-FROM students
-WHERE score =
-    (SELECT max(score)
-     FROM students)
+Select n_group, name
+From students
+Where score =
+    (Select max(score)
+     From students)
 Group by n_group, name
+--#10
+Select st.n_group, st.name
+From students st
+Where st.name = 
+	(Select s.name
+	From students s
+	Where score =
+		(Select max(q.score)
+		 From students q))
