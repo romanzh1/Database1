@@ -32,8 +32,16 @@ On h.id = sth.hobby_id
 Where not sth.date_finish is null
 Group by st.name, h.name, sth.date_finish, sth.date_start, mounth
 --#5
+WITH act_hob1 as (
+select sth.student_id
+From students_hobbies sth
+Where sth.date_finish is null
+Group by sth.student_id
+Having count(*) > 1
+)
+
 Select st.name, st.surname, st.birth_date
 From students st
-Inner join act_hob ah
+Inner join act_hob1 ah
 On st.id = ah.student_id
 where extract(year from age(now(),st.birth_date)) >= 20
