@@ -22,11 +22,12 @@ On h.id = sth.hobby_id
 Group by st.name, st.surname, st.score
 Having sum(h.risk) > 0.9 and st.score > (select avg(score) from students)
 --#4
-Select st.name, h.name, sth.date_finish, sth.date_start, (sth.date_finish-sth.date_start)/30 as mounth
+Select st.name, h.name, sth.date_finish, sth.date_start, 
+(extract (month from age(sth.date_finish,sth.date_start)) + extract(year from age(sth.date_finish,sth.date_start)*12)) as mounth
 From students st
 Inner join students_hobbies sth
 On st.id = sth.student_id
 Inner join hobbies h
 On h.id = sth.hobby_id
 Where not sth.date_finish is null
-Group by st.name, h.name, sth.date_finish, sth.date_start
+Group by st.name, h.name, sth.date_finish, sth.date_start, mounth
