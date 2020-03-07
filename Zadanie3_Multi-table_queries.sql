@@ -31,3 +31,9 @@ Inner join hobbies h
 On h.id = sth.hobby_id
 Where not sth.date_finish is null
 Group by st.name, h.name, sth.date_finish, sth.date_start, mounth
+--#5
+Select st.name, st.surname, st.birth_date
+From students st
+Inner join act_hob ah
+On st.id = ah.student_id
+where extract(year from age(now(),st.birth_date)) >= 20
