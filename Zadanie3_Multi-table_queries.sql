@@ -52,3 +52,13 @@ Inner join students_hobbies sth
 On st.id = sth.student_id
 Where date_finish is null
 Group by st.n_group
+--#7
+Select st.surname, st.n_group, h.risk, h.name, sth.date_start
+From students st
+Inner join students_hobbies sth
+On st.id = sth.student_id
+Inner join hobbies h
+On h.id = sth.hobby_id
+Where sth.date_finish is null
+Order by sth.date_start
+Limit 1
