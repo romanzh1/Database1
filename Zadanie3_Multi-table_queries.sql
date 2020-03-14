@@ -44,4 +44,11 @@ Select st.name, st.surname, st.birth_date
 From students st
 Inner join act_hob1 ah
 On st.id = ah.student_id
-where extract(year from age(now(),st.birth_date)) >= 20
+Where extract(year from age(now(),st.birth_date)) >= 20
+--#6
+Select st.n_group, avg(st.score)
+From students st
+Inner join students_hobbies sth
+On st.id = sth.student_id
+Where date_finish is null
+Group by st.n_group
