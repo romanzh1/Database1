@@ -62,3 +62,11 @@ On h.id = sth.hobby_id
 Where sth.date_finish is null
 Order by sth.date_start
 Limit 1
+--#8
+Select distinct h.name
+From students st
+Inner join students_hobbies sth
+On st.id = sth.student_id
+Inner join hobbies h
+On h.id = sth.hobby_id
+Where st.score = (Select max(score) from students)
