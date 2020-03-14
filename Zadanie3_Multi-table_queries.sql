@@ -70,3 +70,11 @@ On st.id = sth.student_id
 Inner join hobbies h
 On h.id = sth.hobby_id
 Where st.score = (Select max(score) from students)
+--#9
+Select st.surname, h.name
+From students st
+Inner join students_hobbies sth
+On st.id = sth.student_id
+Inner join hobbies h
+On h.id = sth.hobby_id
+Where st.score::varchar like '4%' and st.n_group::varchar like '2%' and sth.date_finish is null
