@@ -90,3 +90,10 @@ Inner join (Select n_group, count(score) as inner_count
 			Group by n_group) t2 
 On t2.n_group = t1.n_group
 Where inner_count/avg_count >= 0.6;
+--#12
+Select count(distinct sth.hobby_id), substr(st.n_group::varchar, 1, 1) as Course
+From students st
+Inner join students_hobbies sth
+On st.id = sth.student_id
+Where date_finish is null
+Group by Course
