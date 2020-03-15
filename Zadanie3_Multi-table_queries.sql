@@ -78,3 +78,15 @@ On st.id = sth.student_id
 Inner join hobbies h
 On h.id = sth.hobby_id
 Where st.score::varchar like '4%' and st.n_group::varchar like '2%' and sth.date_finish is null
+--#10
+--#11
+Select *
+From (Select n_group, count(score) as avg_count 
+	  From students 
+	  Group by n_group) t1
+Inner join (Select n_group, count(score) as inner_count 
+			From students
+			Where score >= 4 
+			Group by n_group) t2 
+On t2.n_group = t1.n_group
+Where inner_count/avg_count >= 0.6;
