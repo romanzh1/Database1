@@ -97,3 +97,10 @@ Inner join students_hobbies sth
 On st.id = sth.student_id
 Where date_finish is null
 Group by Course
+--#13
+Select st.name, st.surname, st.birth_date, substr(st.n_group::varchar, 1, 1) as course
+From students st
+Left join students_hobbies sth
+On st.id = sth.student_id
+Where st.score >= 4.5 and sth.date_start is null
+Order by course asc, st.birth_date desc
