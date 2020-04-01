@@ -79,6 +79,13 @@ Inner join hobbies h
 On h.id = sth.hobby_id
 Where st.score::varchar like '4%' and st.n_group::varchar like '2%' and sth.date_finish is null
 --#10
+Select distinct substr(st.n_group::varchar,1,1) as n_course
+From students st 
+Inner join students_hobbies sth on st.id = sth.student_id
+Inner join hobbies h on sth.hobby_id = h.id
+Where sth.date_finish is null
+Group by st.surname, st.name, st.n_group
+Having count(sth.hobby_id) > 1
 --#11
 Select *
 From (Select n_group, count(score) as avg_count 
