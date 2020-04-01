@@ -159,3 +159,16 @@ Select name, surname, score
 From students
 Order by score desc
 --#22
+With chobbies as (
+	Select substr(st.n_group::varchar, 1, 1) as course, sh.hobby_id, count(*) as c
+	From students st
+	Inner join students_hobbies sh on st.id = sh.student_id
+	Group by course, sh.hobby_id
+), maxforcourse as (
+	Select ch.course, max(c) as max_c
+	From chobbies ch
+	Group by ch.course
+)
+Select ch.course, ch.hobby_id
+From chobbies ch
+Inner join maxforcourse mfc on ch.course = mfc.course and ch.c = mfc.max_c
