@@ -181,3 +181,14 @@ Where st.n_group::varchar like '2%'
 Order by risk desc
 Limit 1
 --#24
+--#27
+Select st.*, max(st.score), avg(st.score), min(st.score)
+From students st
+Where substr(name,1,1) like 'А%'
+Group by st.id
+Having st.score > 4.6
+--#29
+Select substr(st.birth_date::varchar,1,4) as birth_year, count(name)
+From students st 
+Inner join students_hobbies sh on st.id = sh.student_id
+Group by birth_year
