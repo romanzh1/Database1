@@ -143,3 +143,10 @@ Select h.risk as mostrisk
 From hobbies h
 Order by risk desc limit 3
 --#19
+Create or replace view num19 as  
+Select h.name as hobby_name, h.risk,st.name as student_name,st.n_group,extract (year from age(now()::date, sh.date_start)) * 12
+                       + extract(month from age(now()::date, sh.date_start)) as month_length
+From students st 
+Inner join students_hobbies sh on st.id = sh.student_id
+Inner join hobbies h on sh.hobby_id = h.id
+Order by month_length DESC limit 10
