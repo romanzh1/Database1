@@ -150,3 +150,12 @@ From students st
 Inner join students_hobbies sh on st.id = sh.student_id
 Inner join hobbies h on sh.hobby_id = h.id
 Order by month_length DESC limit 10
+--#20
+Select distinct n_group
+From num19
+--#21
+Create or replace view info as  
+Select name, surname, score
+From students
+Order by score desc
+--#22
