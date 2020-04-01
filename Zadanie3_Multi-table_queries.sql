@@ -111,3 +111,30 @@ Left join students_hobbies sth
 On st.id = sth.student_id
 Where st.score >= 4.5 and sth.date_start is null
 Order by course asc, st.birth_date desc
+--#14
+Create view allinfst as
+Select st.* from students st 
+Inner join students_hobbies sh on st.id = sh.student_id
+Inner join hobbies h on sh.hobby_id = h.id
+Where sh.date_finish is null and extract (year from age(now()::date, sh.date_start))>=5
+--#15
+Select h.name, count(sh.student_id) as stud_on_hobby
+From students_hobbies sh 
+Inner join hobbies h on sh.hobby_id = h.id
+Group by hobby_id, h.name
+Order by stud_on_hobby desc
+--#16
+Select h.id
+From students_hobbies sh 
+Inner join hobbies h on sh.hobby_id = h.id
+Group by h.id
+Order by count(sh.student_id) desc limit 1
+--#17
+Select st.*
+From students st
+Inner join students_hobbies sh on st.id = sh.student_id
+Where sh.hobby_id = (Select h.id
+	From students_hobbies sh 
+	Inner join hobbies h on sh.hobby_id = h.id
+	Group by h.id
+	Order by count(sh.student_id) desc limit 1)
