@@ -172,3 +172,12 @@ With chobbies as (
 Select ch.course, ch.hobby_id
 From chobbies ch
 Inner join maxforcourse mfc on ch.course = mfc.course and ch.c = mfc.max_c
+--#23
+Select h.risk as mostpopula, h.name
+From students st 
+Inner join students_hobbies sh on st.id = sh.student_id
+Inner join hobbies h on sh.hobby_id = h.id
+Where st.n_group::varchar like '2%'
+Order by risk desc
+Limit 1
+--#24
