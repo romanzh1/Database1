@@ -180,7 +180,13 @@ Inner join hobbies h on sh.hobby_id = h.id
 Where st.n_group::varchar like '2%'
 Order by risk desc
 Limit 1
---#24
+--#25
+Select sh.hobby_id, count(*) as count_stud
+From students st
+Inner join students_hobbies sh on st.id = sh.student_id
+Group by sh.hobby_id
+Order by count_stud desc
+Limit 1
 --#27
 Select st.*, max(st.score), avg(st.score), min(st.score)
 From students st
