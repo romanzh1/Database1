@@ -138,3 +138,8 @@ Where sh.hobby_id = (Select h.id
 	Inner join hobbies h on sh.hobby_id = h.id
 	Group by h.id
 	Order by count(sh.student_id) desc limit 1)
+--№18
+Select h.risk as mostrisk
+From hobbies h
+Order by risk desc limit 3
+--#19
