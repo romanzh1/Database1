@@ -1,3 +1,4 @@
+BEGIN
 CREATE TABLE store (
     id SERIAL PRIMARY KEY, 
     department_branch_id integer(10) references NOT NULL UNIQUE, 
@@ -327,3 +328,4 @@ VALUES(1, 'Weight', '5'),
 (6, 'Fat content', '80.5%'),
 (8, 'Size', '2x3'),
 (9, 'Size', '5x7');
+COMMIT
