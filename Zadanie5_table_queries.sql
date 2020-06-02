@@ -24,7 +24,7 @@ Inner join client cl on cl.id = pu.client_id
 Where current_date - pu.date_purchase < 240 / 24
 Group by cl.id
 Order by sum_purchase desc
-Limit (Select count(*) * 50 / 100 from (Select cl.*, sum(pu.price) as sum_purchase
+Limit (Select count(*) * 34 / 100 from (Select cl.*, sum(pu.price) as sum_purchase
 From purchase pu
 Inner join client cl on cl.id = pu.client_id
 Where current_date - pu.date_purchase < 240 / 24
@@ -37,7 +37,7 @@ Inner join client cl on cl.id = pu.client_id
 Where current_date - pu.date_purchase < 240 / 24
 Group by cl.id
 Order by sum_purchase desc
-Limit (Select count(*) * 70 / 100 from (Select cl.*, sum(pu.price) as sum_purchase
+Limit (Select count(*) * 50 / 100 from (Select cl.*, sum(pu.price) as sum_purchase
 From purchase pu
 Inner join client cl on cl.id = pu.client_id
 Where current_date - pu.date_purchase < 240 / 24
@@ -48,7 +48,7 @@ Select *
 From schedule
 Where employee_id = 6
 --#10
-Select pu.client_id, to_char(pu.date_purchase, 'Day') as often_day, to_char(pu.date_purchase, 'HH12:MI:SS') as often_time
+Select pu.client_id, to_char(pu.date_purchase, 'Day') as often_day, to_char(pu.time_purchase, 'HH12:MI:SS') as often_time
 From purchase pu
 Group by pu.client_id, often_day, often_time
 Order by pu.client_id
