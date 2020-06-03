@@ -43,6 +43,11 @@ Inner join client cl on cl.id = pu.client_id
 Where current_date - pu.date_purchase < 240 / 24
 Group by cl.id
 Order by sum_purchase desc) as uk)
+--#6
+Select pp.product_id, pr.name, pp.count_product, (current_date - pu.date_purchase) week
+From purchase_product pp
+Inner join product pr on pr.id = pp.product_id
+Inner join purchase pu on pu.id = pp.purchase_id
 --#8
 Select *
 From schedule
@@ -70,6 +75,25 @@ Where store_id = 9 and supplier_id = 4
 Group by em.id
 Order by em.id desc
 Limit 1
+--#14
+/*
+Очевидная проблема заключается в следующем:
+Для того, чтобы суммировать не повторяющиеся строки, необходимо
+использовать distinct, который исключит все повторяющиеся строки.
+(Нужно, чтобы суммировать для 1 магазина в 1 строке)
+В случае, когда у нас сумма сделки будет равна в двух строках таблицы,
+вполне вероятно, что одна из них не учтётся и не войдёт в общую сумму.
+Это можно решить, если к ценам сделок добавлять несколько цифр после точки,
+которые обеспечат их уникальность, однако, это не обеспечит полную уникальность 
+потому что размер типа данных конечен. Другой способ заключается в
+самих возможностях postgresql
+*/
+Select st.id as id_store, sum(distinct su.price) as income, sum(distinct pu.price) as enpense
+From purchase pu
+Inner join store st on st.id = pu.store_id
+Inner join supply su on su.store_id = st.id
+Group by st.id
+Order by st.id
 --#15
 /*
 Лучше всего хранить зарплату сотрудников в таблице сотрудников, где и укаазаны все их данные

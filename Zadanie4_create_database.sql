@@ -107,6 +107,12 @@ CREATE TABLE purchase (
     time_purchase time NOT NULL,
     price numeric(9, 2) NOT NULL
 );
+CREATE TABLE purchase_product (
+    id SERIAL PRIMARY KEY, 
+    purchase_id integer REFERENCES purchase, 
+    product_id integer REFERENCES product, 
+    count_product integer
+);
 CREATE TABLE price_history (
     id SERIAL PRIMARY KEY, 
     product_id integer REFERENCES product, 
@@ -338,7 +344,7 @@ VALUES('Hat', '76%'),
 ('Jewelery', '49%'),
 ('Roulette', '7%'),
 ('Health', '12%');
-INSERT INTO purchase(client_id, stock_id, store_id, date_purchase, time_purchase ,price)
+INSERT INTO purchase(client_id, stock_id, store_id, date_purchase, time_purchase, price)
 VALUES(2, 2, 9, '2018-10-17', 'T12:32:51.310Z', 2007.00),
 (2, 3, 3, '2018-10-17', 'T06:13:04.424Z', 3139.00),
 (3, 7, 6, '2020-05-26', 'T10:47:34.752Z', 1300.00),
@@ -353,6 +359,21 @@ VALUES(2, 2, 9, '2018-10-17', 'T12:32:51.310Z', 2007.00),
 (1, 1, 1, '2020-05-25', 'T22:12:54.637Z', 3065.00),
 (6, 5, 9, '2020-05-28', 'T22:15:54.637Z', 20065.00),
 (2, 3, 4, '2020-05-29', 'T22:12:54.637Z', 4325.00);
+INSERT INTO purchase_product(purchase_id, product_id, count_product)
+VALUES(1, 3, 50),
+(4, 4, 60),
+(10, 3, 50),
+(5, 2, 100),
+(11, 8, 10),
+(2, 7, 120),
+(7, 5, 5),
+(3, 8, 20),
+(12, 3, 55),
+(6, 3, 45),
+(8, 3, 65),
+(9, 3, 78),
+(13, 3, 36),
+(14, 3, 90);
 INSERT INTO price_history (product_id, date_change, new_price)
 VALUES(4, '2020-07-01T10:47:34.752Z', 443.00),
 (1, '2020-07-01T10:47:34.752Z', 625.00),
